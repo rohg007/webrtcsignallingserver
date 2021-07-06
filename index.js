@@ -21,10 +21,10 @@ io.sockets.on('connection', function(socket) {
     socket.emit('log', array);
   }
 
-  socket.on('message', function(message) {
+  socket.on('message', function(room, message) {
     log('Client said: ', message);
     // for a real app, would be room-only (not broadcast)
-    socket.broadcast.emit('message', message);
+    socket.broadcast.to(room).emit('message', message);
   });
 
   socket.on('create or join', function(room) {
